@@ -1,6 +1,6 @@
 import plotly.io as pio
 import pandas as pd
-
+import streamlit as st
 
 def tema_plotly():
     pio.templates['meu_tema'] = pio.templates['plotly_white']
@@ -30,9 +30,11 @@ def tema_plotly():
 
         # atribuindo padrao
     pio.templates.default = 'meu_tema'
+@st.cache_data
+def abrir_arquivo():
+    return pd.read_csv('uber_tratado.csv')
 
 
-df_original = pd.read_csv('uber_tratado.csv')
 
 def range_axis(df:pd.DataFrame,col:str,val:int =1,func:str='max'):
     '''

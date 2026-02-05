@@ -2,8 +2,8 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.io as pio
-from configuracoes.funcoes import tema_plotly
-from configuracoes.funcoes import df_original
+from configuracoes.funcoes import (tema_plotly,abrir_arquivo)
+
 
 # --- configurando o tema dos graficos. ---- 
 
@@ -13,7 +13,7 @@ tema_plotly()
 
 
 # inportando as DF:
-df = df_original
+df = abrir_arquivo()
 
 # --- Configurando a Pagina ---
 st.set_page_config(
