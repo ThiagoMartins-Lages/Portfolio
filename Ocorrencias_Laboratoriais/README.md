@@ -8,5 +8,5 @@ Além disso, os  dados utlizados nesta planilha foram criados utlizando bibliote
 
 ## :key: Para utilização desta planilha utilize o link a baixo.
 
-[Dowload do Arquivo 📥](https://github.com/ThiagoMartins-Lages/Portfolio/blame/main/Ocorrencias_Laboratoriais/Ocorrencias_Laboratoriais.zip)
+[Dowload do Arquivo 📥](https://github.com/ThiagoMartins-Lages/Portfolio/raw/refs/heads/main/Ocorrencias_Laboratoriais/Ocorrencias_Laboratoriais.zip)
 
