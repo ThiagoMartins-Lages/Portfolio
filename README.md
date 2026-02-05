@@ -26,7 +26,7 @@ Crio este Portfólio com o objetivo de **demonstrar minhas habilidades pratias**
   Clique para explorar:
  |Projeto            | Descrição                                              | Tecnologias |
  |-------------------|--------------------------------------------------------|-------------|
- |[Uber](./Uber)   |Análise  Esploratoria de Dados (EDA) de corridas da Uber: padrões de demanda, horários e regiões| Python, Pandas, Matplotlib, Seaborne, Streamlit, Plotly |
+ |[Uber](./Uber)   |Análise  Esploratoria de Dados (EDA) com visualização por meio de Streamlit de corridas da Uber India: padrões de demanda, horários e regiões| Python, Pandas, Matplotlib, Seaborne, Streamlit, Plotly |
  |[Ocorrências Laboratoriais](./Ocorrencias_Laboratoriais) | Desenvolvimento de planilha para gestão de fluxo de Ocorrências Laboratoriais (OL), assim como visualização dos dados via Power BI.| Excel, VBA, Python, Power BI|
 
 
