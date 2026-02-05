@@ -165,7 +165,7 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
         tickformat=",.2f",
     )
 
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,width='stretch')
     with st.expander(label='Analise ✍️'):
         st.markdown(
             '''
@@ -187,7 +187,7 @@ with st.expander(label='Avaliação por Categoria'):
         )
 
     fig.update_yaxes(title_text='Notas')
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig,width='stretch')
 
     with col_esq:
         fig = px.bar(

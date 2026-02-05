@@ -97,7 +97,7 @@ with st.container(key= 'Cancelmanetos'):
                 )
 
             )
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
 
             # Grafico de proporção de situação de corridas
             fig = px.pie(
@@ -121,7 +121,7 @@ with st.container(key= 'Cancelmanetos'):
                     x=-0.1
                 )
             )
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
             with st.expander(label='Analise',expanded=False,icon='✍️'):
                 st.markdown(
                     '''
@@ -146,7 +146,7 @@ with st.container(key= 'Cancelmanetos'):
                     weight="bold"
                 )
             )
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
 
             fig = px.pie(
                 values=mot_motorista,
@@ -163,7 +163,7 @@ with st.container(key= 'Cancelmanetos'):
                 ),
             )
             
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
 
             with st.expander(label='Analise',expanded=False,icon='✍️'):
                 st.markdown(
@@ -205,7 +205,7 @@ with st.container(key= 'Cancelmanetos'):
             fig.update_coloraxes(
                 showscale=False
             )
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
         with col_dir:
             fig = px.pie(
                 values=[receita_cor_concluidas,receita_perdida],
@@ -221,7 +221,7 @@ with st.container(key= 'Cancelmanetos'):
                     weight="bold"
                 )
             )
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,width='stretch')
         with st.expander(label='Analise',expanded=False,icon='✍️'):
             st.markdown(
                 '''

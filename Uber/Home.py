@@ -8,7 +8,6 @@ st.set_page_config(
 
 with st.sidebar:
     
-    st.image(r"utilitarios\Thiago.JPG",width='content')
 
     st.markdown(
         '''

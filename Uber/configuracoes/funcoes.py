@@ -1,6 +1,7 @@
 import plotly.io as pio
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 
 def tema_plotly():
     pio.templates['meu_tema'] = pio.templates['plotly_white']
@@ -32,7 +33,9 @@ def tema_plotly():
     pio.templates.default = 'meu_tema'
 @st.cache_data
 def abrir_arquivo():
-    return pd.read_csv('uber_tratado.csv')
+    base_dir = Path(__file__).resolve().parents[1]
+    caminho = base_dir/ 'uber_tratado.csv'
+    return pd.read_csv(caminho)
 
 
 
