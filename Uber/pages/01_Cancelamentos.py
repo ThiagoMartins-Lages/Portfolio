@@ -93,11 +93,12 @@ with st.container(key= 'Cancelamentos'):
                     yanchor='top',
                     y=1,
                     xanchor='right',
-                    x=-0.1
-                )
+                    x=1,
+                    orientation='v'
+                ),
 
             )
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
 
             # Grafico de proporção de situação de corridas
             fig = px.pie(
@@ -118,10 +119,11 @@ with st.container(key= 'Cancelamentos'):
                     yanchor='top',
                     y=1,
                     xanchor='right',
-                    x=-0.1
+                    x=1,
+                    orientation='v'
                 )
             )
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
             with st.expander(label='Análise',expanded=False,icon='✍️'):
                 st.markdown(
                     '''
@@ -146,7 +148,7 @@ with st.container(key= 'Cancelamentos'):
                     weight="bold"
                 )
             )
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
 
             fig = px.pie(
                 values=mot_motorista,
@@ -163,7 +165,7 @@ with st.container(key= 'Cancelamentos'):
                 ),
             )
             
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
 
             with st.expander(label='Análise',expanded=False,icon='✍️'):
                 st.markdown(
@@ -205,7 +207,7 @@ with st.container(key= 'Cancelamentos'):
             fig.update_coloraxes(
                 showscale=False
             )
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
         with col_dir:
             fig = px.pie(
                 values=[receita_cor_concluidas,receita_perdida],
@@ -221,7 +223,7 @@ with st.container(key= 'Cancelamentos'):
                     weight="bold"
                 )
             )
-            st.plotly_chart(fig,width='stretch')
+            st.plotly_chart(fig,width='content')
         with st.expander(label='Análise',expanded=False,icon='✍️'):
             st.markdown(
                 '''

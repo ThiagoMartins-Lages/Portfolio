@@ -242,7 +242,8 @@ with st.expander(label='Tendência de Faturamento ao Longo de 2024'):
                 overlaying='y',
                 title_text='Faturamento',
                 tickprefix='₹ ',
-                tickformat=',.2f',
+                tickformat='.2s',
+                ticksuffix='i',
                 showgrid=False,
                 
             ),
@@ -346,7 +347,8 @@ with st.expander(label='Tendência de Faturamento ao Longo de 2024'):
             title_text='Faturamento',
             showgrid=False,
             tickprefix='₹ ',
-            tickformat=',.2f',
+            tickformat='.2s',
+            ticksuffix='i',
             range=[range_axis(rec_estacao,'Valor da Reserva',0.95,'min'),range_axis(rec_estacao,'Valor da Reserva',1.05,'max')]
         ),
         title=dict(
