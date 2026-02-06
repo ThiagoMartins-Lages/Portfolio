@@ -70,7 +70,7 @@ receita = receita.sort_values(by='Valor',ascending=False)
 with st.container(key= 'Cancelamentos'):
     st.markdown("## :taxi: Cancelamentos")
     with st.expander(label='Cancelamentos por usuário e motivos',expanded=False,icon='🚫'):
-        col1,col2 = st.columns(2)
+        col1,col2 = st.columns([2,2])
 
         with col1:
 
@@ -91,12 +91,23 @@ with st.container(key= 'Cancelamentos'):
             fig.update_layout(
                 legend= dict(
                     yanchor='top',
-                    y=1,
+                    y=1.2,
                     xanchor='right',
-                    x=1,
-                    orientation='v'
+                    x=0.95,
+                    orientation='v',
+                    font= dict(size=12),
+                    entrywidth=100,
+                    
+                    
                 ),
-
+                shapes=[
+                    dict(
+                        type= 'rect',
+                        xref="paper", yref="paper",
+                        x0=0, y0=-0.1, x1=1, y1=1.3,
+                        line=dict(color="#404142",width=1.5),
+                    )
+                ]
             )
             st.plotly_chart(fig,width='content')
 
@@ -117,11 +128,20 @@ with st.container(key= 'Cancelamentos'):
             fig.update_layout(
                 legend= dict(
                     yanchor='top',
-                    y=1,
+                    y=1.2,
                     xanchor='right',
-                    x=1,
-                    orientation='v'
-                )
+                    x=0.95,
+                    orientation='v',
+                    font=dict(size=10)
+                ),
+                shapes=
+                    [dict(
+                        type= 'rect',
+                        xref="paper", yref="paper",
+                        x0=0, y0=-0.1, x1=1, y1=1.3,
+                        line=dict(color="#404142",width=1.5),
+                    )
+                ]
             )
             st.plotly_chart(fig,width='content')
             with st.expander(label='Análise',expanded=False,icon='✍️'):
@@ -146,8 +166,30 @@ with st.container(key= 'Cancelamentos'):
                     color="black",
                     family="Arial",
                     weight="bold"
+                ),
+                domain=dict(
+                    x=[0,0.8]
                 )
             )
+
+            fig.update_layout(
+                legend=dict(
+                    yanchor='top',
+                    xanchor='right',
+                    x=0.95,
+                    y=1.2,
+                    font=dict(size=10)
+                ),
+                shapes=
+                    [
+                    dict(
+                    type= 'rect',
+                        xref="paper", yref="paper",
+                        x0=0, y0=-0.1, x1=1, y1=1.3,
+                        line=dict(color="#404142",width=1.5),
+                )]
+            )
+
             st.plotly_chart(fig,width='content')
 
             fig = px.pie(
@@ -161,8 +203,28 @@ with st.container(key= 'Cancelamentos'):
                     color="black",
                     family="Arial",
                     weight="bold",
-                    
                 ),
+                domain=dict(
+                    x=[0,0.8]
+                )
+            )
+
+            fig.update_layout(
+                legend=dict(
+                    yanchor='top',
+                    xanchor='right',
+                    x=0.9,
+                    y=1.2,
+                    font=dict(size=10)
+                ),
+                shapes=
+                [
+                    dict(
+                    type= 'rect',
+                        xref="paper", yref="paper",
+                        x0=0, y0=-0.1, x1=1, y1=1.3,
+                        line=dict(color="#404142",width=1.5),
+                )]
             )
             
             st.plotly_chart(fig,width='content')

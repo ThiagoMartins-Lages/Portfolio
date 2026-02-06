@@ -347,7 +347,7 @@ with st.expander(label='Tendência de Faturamento ao Longo de 2024'):
             title_text='Faturamento',
             showgrid=False,
             tickprefix='₹ ',
-            tickformat='.2s',
+            tickformat='.3s',
             ticksuffix='i',
             range=[range_axis(rec_estacao,'Valor da Reserva',0.95,'min'),range_axis(rec_estacao,'Valor da Reserva',1.05,'max')]
         ),

@@ -108,7 +108,8 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
         )
 
         fig.update_coloraxes(
-            colorbar_title_text='Número de Reservas'
+            colorbar_title_text='Número de Reservas',
+            showscale=False
         )
 
         st.plotly_chart(
@@ -153,7 +154,8 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
         hovertemplate='Tipo de Veículo: %{x}<br> Valor(Rupias)/km: ₹ %{y:.2f}'
     )
     fig.update_coloraxes(
-            colorbar_title_text='₹ Valor(Rupias)/km'
+            colorbar_title_text='₹ Valor(Rupias)/km',
+            showscale=False
         )
     fig.update_yaxes(
         tickprefix="₹ ",
