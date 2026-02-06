@@ -1,21 +1,17 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import plotly.io as pio
 from configuracoes.funcoes import (tema_plotly,abrir_arquivo)
 
 
-# --- configurando o tema dos graficos. ---- 
+# --- configurando o tema dos gráficos. ---- 
 
 tema_plotly()
-
-
-
 
 # inportando as DF:
 df = abrir_arquivo()
 
-# --- Configurando a Pagina ---
+# --- Configurando a Página ---
 st.set_page_config(
     page_title= "Analise Performance Veiculas",
     page_icon= "🚙",
@@ -24,7 +20,6 @@ st.set_page_config(
 )
 
 with st.sidebar:
-    
 
     st.markdown(
         '''
@@ -34,12 +29,12 @@ with st.sidebar:
         '''
     )
 
-# --- Perguntas de Negocio --- 
+# --- Perguntas de Negócio --- 
 # avaliando performance veicular.
 
 tipo_veiculo = df['Tipo de Veículo'].value_counts().reset_index()
 
-# avaliação do deslocamento e valor total de coarrida. 
+# avaliação do deslocamento e valor total de corrida. 
 
 performance_veic_total = df.groupby('Tipo de Veículo')[['Distância da Corrida','Valor da Reserva']].sum().sort_values(by='Distância da Corrida',ascending=False).reset_index()
 performance_veic_total['Valor(Rupias)/km'] = performance_veic_total['Valor da Reserva'] / performance_veic_total['Distância da Corrida']
@@ -47,28 +42,28 @@ performance_veic_total['₹ Valor da Reserva'] = performance_veic_total['Valor d
 performance_veic_total['₹ Valor(Rupias)/km'] = performance_veic_total['Valor(Rupias)/km'].apply(lambda x: f'₹ {x:,.2f}')
 
 
-# avaliação do deslocamento e valor medio de coarrida. 
+# avaliação do deslocamento e valor médio de corrida. 
 
 performance_veic_med = df.groupby('Tipo de Veículo')[['Distância da Corrida','Valor da Reserva']].mean().sort_values(by='Distância da Corrida',ascending=False).reset_index()
 performance_veic_med['Valor(Rupias)/km'] = performance_veic_med['Valor da Reserva'] / performance_veic_med['Distância da Corrida']
 performance_veic_med['₹ Valor(Rupias)/km'] = performance_veic_med['Valor(Rupias)/km'].apply(lambda x: f'₹ {x:,.2f}')
 
-# avaliando notas dos veiculos e passageiros. 
+# avaliando notas dos veículos e passageiros. 
 avaliacao_vaiculo = (
     df.groupby('Tipo de Veículo')[['Avaliação do Motorista','Avaliação do Cliente']].mean().sort_values(by='Avaliação do Motorista').reset_index()
 )
 avaliacao_vaiculo['Avaliação do Cliente']=avaliacao_vaiculo['Avaliação do Cliente'].round(2)
 avaliacao_vaiculo['Avaliação do Motorista']=avaliacao_vaiculo['Avaliação do Motorista'].round(2)
 
-    # Criacao da data frame para o Boxplot
+    # Criação da data frame para o Boxplot
 df_bxp = df[['Tipo de Veículo','Avaliação do Motorista','Avaliação do Cliente']].copy()
 df_bxp = df_bxp.melt(id_vars=['Tipo de Veículo'],var_name='Avaliação Usuario',value_name='Nota')
 
 
 
 
-#--- Layout da Pagina ---
-st.markdown("# :bar_chart: Avaliação da Performance Veicular da Frota Ubar India")
+#--- Layout da Página ---
+st.markdown("# :bar_chart: Avaliação da Performance Veicular da Frota Uber Índia")
 
 st.markdown(
     '''
@@ -78,7 +73,7 @@ st.markdown(
 |:------------------|:------------|
 |Auto|Rickshaws motorizado, destinados a corridas curtas e econômicas|
 |Moto|Serviço de transporte por Motos|
-|Go Mini|Categoria ecônomica de carros compactos|
+|Go Mini|Categoria econômica de carros compactos|
 |Go Sedan|Categoria de carros Sedãs|
 |Premier Sedan|Categoria de carros Sedãs de mais alto padrão|
 |Uber XL| SUVs e Minivans para grandes grupos e ou grande volume de bagagem|
@@ -113,7 +108,7 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
         )
 
         fig.update_coloraxes(
-            colorbar_title_text='Numero de Reservas'
+            colorbar_title_text='Número de Reservas'
         )
 
         st.plotly_chart(
@@ -126,7 +121,7 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
                 data_frame=performance_veic_total,
                 values=performance_veic_total['Valor da Reserva'],
                 names=performance_veic_total['Tipo de Veículo'],
-                title='Relação Receita Total por Tipo de Veícular'
+                title='Relação Receita Total por Tipo Veícular'
             )
 
             fig.update_traces(
@@ -148,7 +143,7 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
         y=performance_ord_val['Valor(Rupias)/km'],
         color='Valor(Rupias)/km',
         text='₹ Valor(Rupias)/km',
-        title='Valor Medio por Quilômetro Rodado por Tipo de Veículo'
+        title='Valor Médio por Quilômetro Rodado por Tipo de Veículo'
     )
 
     fig.update_traces(
@@ -166,11 +161,11 @@ with st.expander(label="Performance por Categoria Veicular",expanded=False):
     )
 
     st.plotly_chart(fig,width='stretch')
-    with st.expander(label='Analise ✍️'):
+    with st.expander(label='Análise ✍️'):
         st.markdown(
             '''
             - A partir da observação do Gráfico "**Número total de Reservas por Tipo de Carro**", verifica-se que o Tipo de Veículo Auto concentra o maior volume de corridas reservadas,
-            evidenciando uma preferência significativa dos usuários por essa categoria específica de transporte.
+            evidenciando uma preferência significativa dos usuários por essa categoria.
             - No entanto, ao analisar o indicador de "**Valor por Quilômetro Rodado por Tipo de Veículo**", identifica-se uma inconsistência na estrutura de precificação:
                 - Todos os tipos de veículos apresentam o mesmo valor por quilômetro, o que sugere uma padronização excessiva na política tarifária.
                 - Tal uniformidade pode desestimular a permanência de motoristas vinculados a categorias de maior valor agregado (como veículos premium), 
@@ -225,7 +220,7 @@ with st.expander(label='Avaliação por Categoria'):
         fig.update_yaxes(title_text='Notas',range=[1,5])
         st.plotly_chart(fig,width='content')
     
-    with st.expander(label='Analise ✍️',expanded=False):
+    with st.expander(label='Análise ✍️',expanded=False):
         st.markdown(
             '''
             - No gráfico Distribuição das Avaliações de Clientes e Motoristas, observa‑se que as avaliações dos clientes tendem a apresentar valores superiores. 

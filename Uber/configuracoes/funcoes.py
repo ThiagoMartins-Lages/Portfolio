@@ -16,7 +16,7 @@ def tema_plotly():
         "#245A87",
         "#0B2C5F"
     ]
-        # niveis da escala.
+        # níveis da escala.
     pio.templates['meu_tema']['layout']['colorscale'] = {
         'sequential': [
             [0.00, "#A8E6A3"],
@@ -29,7 +29,7 @@ def tema_plotly():
         ]
     }
 
-        # atribuindo padrao
+        # atribuindo padrão
     pio.templates.default = 'meu_tema'
 @st.cache_data
 def abrir_arquivo():
@@ -41,7 +41,7 @@ def abrir_arquivo():
 
 def range_axis(df:pd.DataFrame,col:str,val:int =1,func:str='max'):
     '''
-    Gera um valor baseado na fuição escolhida para gerar o valor maximo ou minimo de um eixo  
+    Gera um valor baseado na função escolhida para gerar o valor máximo ou mínimo de um eixo  
     
     :param df: A DataFrame a ser utilizada
     :type df: pd.DataFrame
@@ -49,7 +49,7 @@ def range_axis(df:pd.DataFrame,col:str,val:int =1,func:str='max'):
     :type col: str
     :param val: A constante de correção da altura do eixo. Padrão 1
     :type val: int
-    :param func: Valores entre 'mim' ou 'max' que determina se o valor sera o menor ou maior do DataFrame. Padrão 'max'
+    :param func: Valores entre 'min' ou 'max' que determina se o valor sera o menor ou maior do DataFrame. Padrão 'max'
     :type func: str
     '''
     
@@ -59,3 +59,7 @@ def range_axis(df:pd.DataFrame,col:str,val:int =1,func:str='max'):
     if func == 'max':
         maximo = df[col].max() * val
         return maximo
+
+@st.cache_data
+def unic_val(df:pd.DataFrame,col:str):
+    return df[col].unique()

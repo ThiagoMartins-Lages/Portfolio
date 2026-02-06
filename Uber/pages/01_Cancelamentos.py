@@ -16,7 +16,7 @@ df = abrir_arquivo()
 
 # --- Configurando a Pagina ---
 st.set_page_config(
-    page_title= "Analise Perfil de Cancelamentos",
+    page_title= "Análise do Perfil de Cancelamentos",
     page_icon= "🚖",
     layout='wide'
     
@@ -34,7 +34,7 @@ with st.sidebar:
     )
 
 
-st.markdown("# :bar_chart: Avaliação do Perfil de Cancelamentos Uber India")
+st.markdown("# :bar_chart: Avaliação do Perfil de Cancelamentos Uber Índia")
 
 # --- Perguntas de Negocio --- 
 # avaliando taxa cancelamento. 
@@ -67,9 +67,9 @@ receita = receita.sort_values(by='Valor',ascending=False)
 
 
 # --- Dashboard ---
-with st.container(key= 'Cancelmanetos'):
+with st.container(key= 'Cancelamentos'):
     st.markdown("## :taxi: Cancelamentos")
-    with st.expander(label='Cancelamentos por usuraio e motivos',expanded=False,icon='🚫'):
+    with st.expander(label='Cancelamentos por usuário e motivos',expanded=False,icon='🚫'):
         col1,col2 = st.columns(2)
 
         with col1:
@@ -78,7 +78,7 @@ with st.container(key= 'Cancelmanetos'):
             fig = px.pie(
                 values=[cancelamento_mot,cancelamento_pass],
                 names=['Motoristas','Passageiros'],
-                title='Média de Cancelamento por tipo de Usario',
+                title='Média de Cancelamento por tipo de Usuário',
                 )
             fig.update_traces(
                 textfont = dict(
@@ -122,11 +122,11 @@ with st.container(key= 'Cancelmanetos'):
                 )
             )
             st.plotly_chart(fig,width='stretch')
-            with st.expander(label='Analise',expanded=False,icon='✍️'):
+            with st.expander(label='Análise',expanded=False,icon='✍️'):
                 st.markdown(
                     '''
                     - Pode-se verificar que, apesar de a maior parte das corridas serem completadas, há uma elevada taxa de cancelamente, principalmente quando se verifica a taxa de cancelamento pelo motorista
-                    - Somanto todos os cancelamentos eles representam 32% de todas as corridas registradas.
+                    - Somando todos os cancelamentos, eles representam 32% de todas as corridas registradas.
                     '''
                 )
 
@@ -165,7 +165,7 @@ with st.container(key= 'Cancelmanetos'):
             
             st.plotly_chart(fig,width='stretch')
 
-            with st.expander(label='Analise',expanded=False,icon='✍️'):
+            with st.expander(label='Análise',expanded=False,icon='✍️'):
                 st.markdown(
                     '''
                     Os motivos de cancelamento pelo motorista possuem valores muito semelhantes. Isso pode implicar em uma prática abusiva já analisada no Brasil,
@@ -222,10 +222,10 @@ with st.container(key= 'Cancelmanetos'):
                 )
             )
             st.plotly_chart(fig,width='stretch')
-        with st.expander(label='Analise',expanded=False,icon='✍️'):
+        with st.expander(label='Análise',expanded=False,icon='✍️'):
             st.markdown(
                 '''
-                - Notas do Grafico.
+                - Notas do Gráfico.
                     - A Receita Gerada é o total gerado no somatório entre as corridas completadas e as corridas interrompidas
                     - As corridas interrompidas foram consideradas neste cálculo, pois mesmo interrompidas, há um valor a ser pago pela distância percorrida
                     - O Custo com Cancelamento é o valor que foi deixado de ser gerado considerando todas as corridas canceladas e com motoristas não encontrados

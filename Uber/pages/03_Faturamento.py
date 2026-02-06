@@ -2,20 +2,20 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from configuracoes.funcoes import (tema_plotly,abrir_arquivo,range_axis)
+from configuracoes.funcoes import (tema_plotly,abrir_arquivo,range_axis,unic_val)
 
 
-# --- configurando o tema dos graficos. ---- 
+# --- configurando o tema dos gráficos. ---- 
 
 tema_plotly()
 
 
 
 
-# inportando as DF:
+# importando as DF:
 df = abrir_arquivo()
 
-# --- Configurando a Pagina ---
+# --- Configurando a Página ---
 st.set_page_config(
     page_title= "Formas de Pagamento",
     page_icon= "💳",
@@ -25,19 +25,32 @@ st.set_page_config(
 
 with st.sidebar:
     
+    situ_corrida = st.multiselect(
+        label='Selecione o Tipo de Corrida',
+        options=unic_val(df,'Situação da Corrida'),
+        default=[]
+    )
 
     st.markdown(
         '''
+        ---
         - Criado por : Thiago Martins
         - Linkedin : [Meu perfil](https://www.linkedin.com/in/thiagomartins1993/)
         - GitHub : [Meus Projetos](https://github.com/ThiagoMartins-Lages/Portfolio)
         '''
     )
+if situ_corrida:
+    df_selec = df.query(
+        "`Situação da Corrida` == @situ_corrida"
+    )
+else:
+    df_selec = df.copy()
 
-# --- Perguntas de Negocio ---
 
-    # Formas de pagamento mais utilizadads.
-tipo_pag = df.groupby('Método de Pagamento').agg({
+# --- Perguntas de Negócio ---
+
+    # Formas de pagamento mais utilizadas.
+tipo_pag = df_selec.groupby('Método de Pagamento').agg({
     "ID da Reserva" : 'count',
     "Valor da Reserva" : 'sum'
 })
@@ -46,10 +59,10 @@ tipo_pag['% Reservas'] = tipo_pag['ID da Reserva'] / tipo_pag['ID da Reserva'].s
 tipo_pag['% Valor'] = tipo_pag['Valor da Reserva'] / tipo_pag['Valor da Reserva'].sum()
     # _____ 
 
-    # Receitas por Estacao do ano,Mes e Dia da Semana.
-rec_periodica = df[['ID da Reserva', 'Data','Estacao','Ano', 'Mes', 'Nome_Mes','Dia', 'Dia_Semana','DOW', 'Trimestre','Valor da Reserva']].sort_values(by='Data').copy()
+    # Receitas por Estacão do Ano, Mês e Dia da Semana.
+rec_periodica = df_selec[['ID da Reserva', 'Data','Estacao','Ano', 'Mes', 'Nome_Mes','Dia', 'Dia_Semana','DOW', 'Trimestre','Valor da Reserva']].sort_values(by='Data').copy()
 rec_periodica = rec_periodica.sort_values(by='Mes')
-        # receita por mes
+        # receita por mês
 rec_mes = rec_periodica.groupby(['Mes','Nome_Mes']).agg({
     'ID da Reserva': 'count',
     'Valor da Reserva': 'sum'
@@ -61,7 +74,7 @@ rec_mes['Var_abs'] = rec_mes['Valor da Reserva'].diff()
 rec_mes['Var_percentual'] = rec_mes['Valor da Reserva'].pct_change()
 rec_mes['cor'] = rec_mes['Var_percentual'].apply(lambda x: '#FF746C' if x < 0 else "#245A87")
 
-        # receita por estacao
+        # receita por estação
 rec_estacao = rec_periodica.groupby('Estacao').agg({
     'ID da Reserva': 'count',
     'Valor da Reserva': 'sum'
@@ -71,7 +84,7 @@ rec_estacao = rec_estacao.sort_values(by='Estacao')
 
 # ______
 # --- Layout ---
-st.markdown("# :bar_chart: Avaliação do Faturamento gerado pela Ubar India")
+st.markdown("# :bar_chart: Avaliação do Faturamento gerado pela Uber India")
 st.markdown(
     '''
     Breve explicação:  
@@ -79,7 +92,7 @@ st.markdown(
     '''
 )
 
-with st.expander(label='Tipo de pagamentos mais Utilizados'):
+with st.expander(label='Tipos de pagamentos mais Utilizados'):
     col_esq,col_dir = st.columns(2)
 
     with col_esq:
@@ -145,17 +158,17 @@ with st.expander(label='Tipo de pagamentos mais Utilizados'):
             '''
             *Notas do Gráfico*
             - Podemos verificar que **32%** das corridas não tiveram seu tipo de pagamento informado.   
-            - A ausencia de informações sobre o tipo de pagamento em quase um terço das corridas compromente a comfiabilidade da análise de tendencia.  
+            - A ausência de informações sobre o tipo de pagamento em quase um terço das corridas compromente a confiabilidade da análise de tendência.  
             
             ----
-            *Motivos da Ausencia de Metodo de Pagamento*
-            - As corridas que não possuem os metodos de pagamento são justamente as com estatus de  Canceladas e Motorista Não encontrado.
-            - A uber tem uma politica de no momento da reserva da corrida o usuario deve informar o método de pagamento.
-                - Desta forma os métodos de pagamento das corridas  não estão sendo armasedos para estas ocorrencias 
-                - Essa falta de informação pode distorcer a conclusão sobre preferencia de pagamentos dos usuarios e preferencias dos motoristas.
+            *Motivos da Ausência de Método de Pagamento*
+            - As corridas que não possuem os métodos de pagamento são justamente as com status de Canceladas e Motorista Não Encontrado.
+            - A uber tem uma política de, no momento da reserva da corrida, o usuário deve informar o método de pagamento.
+                - Desta forma os métodos de pagamento das corridas não estão sendo armazenados para estas ocorrências 
+                - Essa falta de informação pode distorcer a conclusão sobre preferência de pagamentos dos usuários e preferências dos motoristas.
             
             ----
-            *Relevancia da Uber Wallet*:
+            *Relevância da Uber Wallet*:
             - A Uber Wallet representa apenas 8,6% dos métodos de pagamento registrados, um percentual ainda tímido diante das demais opções disponíveis.
             - A utilização da Uber Wallet também facilita a rastreabilidade de transações, tanto para o cliente quanto para o motorista, garantido mais segurança para ambos.  
             - **Transparência para motoristas**:
@@ -167,7 +180,7 @@ with st.expander(label='Tipo de pagamentos mais Utilizados'):
         )
 
 
-with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
+with st.expander(label='Tendência de Faturamento ao Longo de 2024'):
     col_esq,col_dir = st.columns(2)
 
     with col_esq:
@@ -206,7 +219,7 @@ with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
             yaxis=dict(
                 side='left',
                 title_text='Contagem de Corridas',
-                range=[11000, 13000],
+                range=[range_axis(rec_mes,'ID da Reserva',0.85,'min'),range_axis(rec_mes,'ID da Reserva',1.05,'max')],
                 showgrid=False
             ),
             yaxis2=dict(
@@ -247,7 +260,6 @@ with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
                 title_text='Variação Mensal',
                 tickformat='.2%',
                 range=[range_axis(rec_mes,'Var_percentual',1.5,'min'),range_axis(rec_mes,'Var_percentual',1.5,'max')]
-
             ),
             xaxis=dict(
                 categoryorder='array',
@@ -309,7 +321,7 @@ with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
         ),
         yaxis=dict(
             side='left',
-            range=[35000,38000],
+            range=[range_axis(rec_estacao,'ID da Reserva',0.94,'min'),range_axis(rec_estacao,'ID da Reserva',1.01,'max')],
             title_text='Contagem de Corridas',
             showgrid=False
         ),
@@ -320,7 +332,7 @@ with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
             showgrid=False,
             tickprefix='₹ ',
             tickformat=',.2f',
-            range=[17000000,18200000]
+            range=[range_axis(rec_estacao,'Valor da Reserva',0.95,'min'),range_axis(rec_estacao,'Valor da Reserva',1.05,'max')]
         ),
         title=dict(
             text='Receita e Quantidade de Reservas por Estação do Ano'
@@ -329,10 +341,10 @@ with st.expander(label='Tendencia de Faturamento ao Longo de 2024'):
 
     st.plotly_chart(fig,width='stretch')
 
-    with st.expander(label='Analise ✍️'):
+    with st.expander(label='Análise ✍️'):
         st.markdown(
             '''
-            **Sasionalidade**
+            **Sazonalidade**
             - Observa‑se ao longo do ano uma variação significativa no faturamento da plataforma, evidenciando forte influência sazonal sobre a demanda 
             - O mês de março apresenta o maior faturamento e também o maior crescimento positivo. Esse comportamento está associado ao **Festival Holi**,
             celebração nacional que marca a chegada da primavera.
