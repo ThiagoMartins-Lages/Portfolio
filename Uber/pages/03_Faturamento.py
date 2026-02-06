@@ -25,9 +25,16 @@ st.set_page_config(
 
 with st.sidebar:
     
+    st.markdown('Filtros de Pagina')
     situ_corrida = st.multiselect(
-        label='Selecione o Tipo de Corrida',
+        label='Selecione o Estatus de Corrida',
         options=unic_val(df,'Situação da Corrida'),
+        default=[]
+    )
+
+    tipo_veiculo = st.multiselect(
+        label='Selecione o Tipo de Veiculo',
+        options=unic_val(df,'Tipo de Veículo'),
         default=[]
     )
 
@@ -39,9 +46,17 @@ with st.sidebar:
         - GitHub : [Meus Projetos](https://github.com/ThiagoMartins-Lages/Portfolio)
         '''
     )
-if situ_corrida:
+if situ_corrida and not tipo_veiculo:
     df_selec = df.query(
         "`Situação da Corrida` == @situ_corrida"
+    )
+elif tipo_veiculo and not situ_corrida:
+    df_selec = df.query(
+        "`Tipo de Veículo` == @tipo_veiculo"
+    )
+elif situ_corrida and tipo_veiculo:
+    df_selec = df.query(
+        "`Situação da Corrida` == @situ_corrida & `Tipo de Veículo` == @tipo_veiculo"
     )
 else:
     df_selec = df.copy()
