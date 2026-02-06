@@ -4,14 +4,13 @@ Bem-vindo ao meu portfólio de projetos em **Análise de Dados**! Aqui você enc
 ---
 ##  Sobre mim
 
-Oi! Eu sou o Thiago Martins e estou começando minha jornada na área de dados.
-Este portfólio é o meu espaço para mostrar o que venho aprendendo e construindo. 
+Olá ! Me chamo Thiago Martins e sou um analista orientado a dados com formação em Engenharia Química e experiência em estatística aplicada, automação de processos e criação de dashboards para apoiar decisões estratégicas. Transformo dados brutos em insights acionáveis utilizando Python, SQL, Power BI e Excel (VBA).
 
 Possuo habilidades e conhecimento em :
 
 - :bar_chart: Análise exploratória de dados (EDA);
 - :clipboard: Limpeza e tratamento de dados;
-- :chart_with_upwards_trend: Visualizações interativas com Power BI e Matplotlib;
+- :chart_with_upwards_trend: Visualizações com Power BI, Streamlit, Matplotlib e Seaborn;
 - :speech_balloon: Comunicação de insights com storytelling.
 ---
  
@@ -24,8 +23,8 @@ Crio este Portfólio com o objetivo de **demonstrar minhas habilidades pratias**
  Cada pasta neste repositório representa um projeto individual. 
 
   Clique para explorar:
- |Projeto            | Descrição                                              | Tecnologias |
- |-------------------|--------------------------------------------------------|-------------|
+ |Projeto            | Descrição   | Tecnologias |
+ |-------------------|-------------|-------------|
  |[Uber](./Uber)   |Análise  Esploratoria de Dados (EDA) com visualização por meio de Streamlit de corridas da Uber India: padrões de demanda, horários e regiões| Python, Pandas, Matplotlib, Seaborne, Streamlit, Plotly |
  |[Ocorrências Laboratoriais](./Ocorrencias_Laboratoriais) | Desenvolvimento de planilha para gestão de fluxo de Ocorrências Laboratoriais (OL), assim como visualização dos dados via Power BI.| Excel, VBA, Python, Power BI|
 
